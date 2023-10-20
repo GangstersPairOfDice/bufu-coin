@@ -2,7 +2,7 @@
 
 BUFU Coin is the next hottest cryptocurrency in town!
 
-BUFU Coin does not guarentee anything, and if at any point we make a lot of money, we will steal it from you!
+BUFU Coin does not guarantee anything, and if at any point we make a lot of money, we will steal it from you!
 
 You heard it here first!
 

@@ -1,4 +1,4 @@
-# BUFU Coin - Buy Us, Fuck You !!!
+# BUFU Coin - Buy Us, Fuck U !!!
 
 BUFU Coin is the next hottest cryptocurrency in town!
 
@@ -6,7 +6,7 @@ BUFU Coin does not guarantee anything, and if at any point we make a lot of mone
 
 You heard it here first!
 
-Buy Us, Fuck You !!!
+Buy Us, Fuck U !!!
 
 ## Create T3 App
 

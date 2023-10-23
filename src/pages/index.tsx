@@ -3,13 +3,15 @@ import Link from "next/link";
 import * as crypto from "crypto";
 
 export default function Home() {
+  // class that defines the block structure
   class Block {
-    public index: number;
-    public hash: string;
-    public previousHash: string;
-    public timestamp: number;
-    public data: string;
+    public index: number; // heigh of block in blockchain
+    public hash: string; // sha256 hash from content of block
+    public previousHash: string; // ref to previous block hash
+    public timestamp: number; // a timestamp
+    public data: string; // any data that is included in the block
 
+    // inits object instance of the block class
     constructor(
       index: number,
       hash: string,
@@ -25,6 +27,7 @@ export default function Home() {
     }
   }
 
+  // unique identifier of the block
   const calculateHash = (
     index: number,
     previousHash: string,
@@ -36,14 +39,16 @@ export default function Home() {
       .update(index + previousHash + timestamp + data)
       .toString();
 
+  // first block in the blockchain
   const genesisBlock: Block = new Block(
     0,
-    "816534932c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7",
+    calculateHash(0, null, 1234567890, "buy us, fuck you!!!"),
     null,
-    1465154705,
+    1234567890,
     "buy us, fuck you!!!",
   );
 
+  // generates next block
   const generateNextBlock = (blockData: string) => {
     const previousBlock: Block = getLatestBlock();
     const nextIndex: number = previousBlock.index + 1;
@@ -64,8 +69,10 @@ export default function Home() {
     return newBlock;
   };
 
+  // stores the blockchain in an in-memory js array
   const blockchain: Block[] = [genesisBlock];
 
+  // validates the integrity of blocks
   const isValidNewBlock = (newBlock: Block, previousBlock: Block) => {
     if (previousBlock.index + 1 !== newBlock.index) {
       console.log("invalid index");
@@ -88,6 +95,7 @@ export default function Home() {
     return true;
   };
 
+  // validates the structure of the block
   const isValidBlockStructure = (block: Block): boolean => {
     return (
       typeof block.index === "number" &&

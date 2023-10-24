@@ -42,8 +42,8 @@ export default function Home() {
   // first block in the blockchain
   const genesisBlock: Block = new Block(
     0,
-    calculateHash(0, null, 1234567890, "buy us, fuck you!!!"),
-    null,
+    calculateHash(0, "buy us, fuck you!!", 1234567890, "buy us, fuck you!!!"),
+    "buy us, fuck you!!!",
     1234567890,
     "buy us, fuck you!!!",
   );
@@ -104,5 +104,23 @@ export default function Home() {
       typeof block.timestamp === "number" &&
       typeof block.data === "string"
     );
+  };
+
+  // validates the blockchain
+  const isValidChain = (blockchainToValidate: Block[]): boolean => {
+    const isValidGenesis = (block: Block): boolean => {
+      return JSON.stringify(block) === JSON.stringify(genesisBlock);
+    };
+
+    if (!isValidGenesis(blockchainToValidate[0])) {
+      return false;
+    }
+
+    for (let i = 1; i < blockchainToValidate.length; i++) {
+      if (!isValidNewBlock([i], blockchainToValidate[i - 1])) {
+        return false;
+      }
+    }
+    return true;
   };
 }

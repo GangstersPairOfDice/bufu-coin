@@ -70,7 +70,7 @@ export default function Home() {
   };
 
   // stores the blockchain in an in-memory js array
-  const blockchain: Block[] = [genesisBlock];
+  let blockchain: Block[] = [genesisBlock];
 
   // validates the integrity of blocks
   const isValidNewBlock = (newBlock: Block, previousBlock: Block) => {
@@ -122,5 +122,18 @@ export default function Home() {
       }
     }
     return true;
+  };
+
+  // choosing the longest chain incase of conflicts
+  const replaceChain = (newBlocks: Block[]) => {
+    if (isValidChain(newBlocks) && newBlocks.length > blockchain.length) {
+      console.log(
+        "Received blockchain is valid. Replacing current blockchain with received blockchain",
+      );
+      blockchain = newBlocks;
+      broadcastLatest();
+    } else {
+      console.log("Received blockchain invalid");
+    }
   };
 }
